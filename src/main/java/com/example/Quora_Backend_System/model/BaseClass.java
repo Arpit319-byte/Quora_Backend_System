@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class BaseClass {
+public abstract class BaseClass {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
