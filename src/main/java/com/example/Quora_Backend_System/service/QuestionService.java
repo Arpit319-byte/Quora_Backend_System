@@ -17,6 +17,6 @@ public class QuestionService {
     public Question updateQuestion(Long questionId, Question question) {
     }
 
-    public void deleteQuestion(Long questionId) {
+    public Boolean deleteQuestion(Long questionId) {
     }
 }
