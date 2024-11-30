@@ -21,9 +21,11 @@ public abstract class BaseClass {
 
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false,updatable = false)
     private LocalDateTime createdAt;
 
 
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
     private LocalDateTime updatedAt;
 }
