@@ -22,12 +22,12 @@ public class Answer extends BaseClass {
 
     @ManyToOne
     private User user;
-
-    @OneToMany
-    private List<Comment> comments;
-
-    @OneToOne
-    private Report report;
+//
+//    @OneToMany
+//    private List<Comment> comments;
+//
+//    @OneToOne
+//    private Report report;
 
 
 }

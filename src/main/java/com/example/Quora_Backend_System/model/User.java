@@ -27,7 +27,7 @@ public class User extends BaseClass{
     @OneToMany(cascade = CascadeType.ALL)
     private List<Answer> answers;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Comment> comments;
+//    @OneToMany(cascade = CascadeType.ALL)
+//    private List<Comment> comments;
 
 }

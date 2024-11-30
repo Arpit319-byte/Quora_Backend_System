@@ -1,9 +1,6 @@
 package com.example.Quora_Backend_System.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
@@ -22,10 +19,10 @@ public class Question extends BaseClass {
     @OneToOne
     private User user;
 
-    @ManyToOne
+    @OneToMany(mappedBy = "question")
     private List<Answer> answers;
 
-    @ManyToOne
-    private List<Comment> comments;
+//    @OneToMany(mappedBy = "question")
+//    private List<Comment> comments;
 
 }
