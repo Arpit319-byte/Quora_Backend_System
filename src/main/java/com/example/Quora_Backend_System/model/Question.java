@@ -19,7 +19,6 @@ public class Question extends BaseClass {
     @Column(nullable = false)
     private String content;
 
-    @Column(nullable = false)
     @OneToOne
     private User user;
 
