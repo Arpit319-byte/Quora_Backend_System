@@ -16,6 +16,6 @@ public class AnswerService {
     public Answer updateAnswer(Long answerId, Answer answer) {
     }
 
-    public void deleteAnswer(Long answerId) {
+    public Boolean deleteAnswer(Long answerId) {
     }
 }
