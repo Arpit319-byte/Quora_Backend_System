@@ -1,6 +1,7 @@
 package com.example.Quora_Backend_System.controller;
 
 import com.example.Quora_Backend_System.model.User;
+import com.example.Quora_Backend_System.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
