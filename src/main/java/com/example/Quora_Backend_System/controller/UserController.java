@@ -2,14 +2,20 @@ package com.example.Quora_Backend_System.controller;
 
 import com.example.Quora_Backend_System.model.User;
 import com.example.Quora_Backend_System.service.UserService;
+import jakarta.validation.Valid;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
+
+    private static final org.slf4j.Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private UserService userService;
 
@@ -19,27 +25,50 @@ public class UserController {
     }
 
     @GetMapping
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    public ResponseEntity<List<User>> getAllUsers() {
+        logger.info("Getting all users");
+        return ResponseEntity.ok(userService.getAllUsers());
     }
 
     @GetMapping("/{userId}")
-    public User getUserById(@PathVariable Long userId) {
-        return userService.getUserById(userId);
+    public ResponseEntity<User> getUserById(@PathVariable Long userId) {
+
+        User user = userService.getUserById(userId);
+        if (user == null) {
+            logger.warn("User not found");
+            return ResponseEntity.notFound().build();
+        }
+        logger.info("Getting user by id - " + userId);
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.createUser(user);
+    public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
+        logger.info("Creating user");
+        User createdUser = userService.createUser(user);
+        return ResponseEntity.ok(createdUser);
     }
 
     @PutMapping("/{userId}")
-    public User updateUser(@PathVariable Long userId, @RequestBody User user) {
-        return userService.updateUser(userId, user);
+    public ResponseEntity<User> updateUser(@PathVariable Long userId, @Valid @RequestBody User user) {
+
+        User updatedUser = userService.updateUser(userId, user);
+        if(updatedUser == null) {
+            logger.warn("User not found");
+            return ResponseEntity.notFound().build();
+        }
+        logger.info("Updating user");
+        return ResponseEntity.ok(updatedUser);
     }
 
     @DeleteMapping("/{userId}")
-    public void deleteUser(@PathVariable Long userId) {
-        userService.deleteUser(userId);
+    public ResponseEntity<?> deleteUser(@PathVariable Long userId) {
+        Boolean isDeleted = userService.deleteUser(userId);
+        if (!isDeleted) {
+            logger.warn("User not found");
+            return ResponseEntity.notFound().build();
+        }
+        logger.info("Deleting user");
+        return ResponseEntity.noContent().build();
     }
 }
