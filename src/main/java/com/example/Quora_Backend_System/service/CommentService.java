@@ -20,5 +20,6 @@ public class CommentService {
     }
 
     public boolean deleteComment(Long commentId) {
+        return false;
     }
 }
