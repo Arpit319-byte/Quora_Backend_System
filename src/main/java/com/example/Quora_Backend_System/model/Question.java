@@ -16,13 +16,17 @@ public class Question extends BaseClass {
     @Column(nullable = false)
     private String content;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "user_id")
     private User user;
 
     @OneToMany(mappedBy = "question")
     private List<Answer> answers;
 
-//    @OneToMany(mappedBy = "question")
-//    private List<Comment> comments;
+    @OneToMany(mappedBy = "ParentType")
+    List<Comment> comments;
+
+    @OneToMany(mappedBy = "targetEntity")
+    List<Report> reports;
 
 }
