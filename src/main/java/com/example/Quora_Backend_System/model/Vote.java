@@ -26,8 +26,4 @@ public class Vote extends BaseClass {
     @Column(nullable = false)
     private TargetEntity targetEntity;
 
-    public enum Type {
-        UPVOTE,
-        DOWNVOTE
-    }
 }
