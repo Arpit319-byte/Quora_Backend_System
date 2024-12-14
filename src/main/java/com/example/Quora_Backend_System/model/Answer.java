@@ -25,12 +25,12 @@ public class Answer extends BaseClass {
     @JoinColumn(name = "question_id")
     private Question question;
 
-    @OneToMany(mappedBy = "answer")
+    @OneToMany(mappedBy = "answer",cascade = CascadeType.ALL)
     private List<Comment> comment;
 
-    @OneToMany(mappedBy = "vote")
+    @OneToMany(mappedBy = "VoteType",cascade = CascadeType.ALL)
     private List<Vote> votes;
 
-    @OneToMany(mappedBy = "report")
+    @OneToMany(mappedBy = "report",cascade = CascadeType.ALL)
     private List<Report> reports;
 }
