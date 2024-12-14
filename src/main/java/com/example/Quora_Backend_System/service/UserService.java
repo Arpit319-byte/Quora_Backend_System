@@ -73,10 +73,7 @@ public class UserService{
                 logger.error("User not found for id - {}", userId);
                 return null;
             }
-            userToUpdate.setFirstName(user.getFirstName());
-            userToUpdate.setLastName(user.getLastName());
-            userToUpdate.setEmail(user.getEmail());
-            userToUpdate.setPassword(user.getPassword());
+
             return userRepository.save(userToUpdate);
         } catch (Exception e) {
             logger.error("Error occurred while updating user by id - " + userId, e);
