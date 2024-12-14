@@ -27,9 +27,4 @@ public class Comment extends BaseClass {
     @Column(nullable = false)
     private ParentType parentType;
 
-    public enum ParentType {
-        QUESTION,
-        ANSWER
-    }
-
 }
