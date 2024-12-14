@@ -18,16 +18,19 @@ public class Answer extends BaseClass {
     private String content;
 
     @ManyToOne
-    private Question question;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @ManyToOne
-    private User user;
-//
-//    @OneToMany
-//    private List<Comment> comments;
-//
-//    @OneToOne
-//    private Report report;
+    @JoinColumn(name = "question_id")
+    private Question question;
 
+    @OneToMany(mappedBy = "answer")
+    private List<Comment> comment;
 
+    @OneToMany(mappedBy = "vote")
+    private List<Vote> votes;
+
+    @OneToMany(mappedBy = "report")
+    private List<Report> reports;
 }
