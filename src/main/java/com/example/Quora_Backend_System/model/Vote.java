@@ -14,12 +14,16 @@ import lombok.Setter;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Vote extends BaseClass {
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Type type;
 
     @ManyToOne
     @JoinColumn(name = "user_id",nullable = false)
     private User user;
 
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private TargetEntity targetEntity;
 
     public enum Type {
