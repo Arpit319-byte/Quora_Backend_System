@@ -30,10 +30,4 @@ public class Vote extends BaseClass {
         UPVOTE,
         DOWNVOTE
     }
-
-    public enum TargetEntity {
-        QUESTION,
-        ANSWER,
-        COMMENT
-    }
 }
