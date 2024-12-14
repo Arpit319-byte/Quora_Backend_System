@@ -1,6 +1,7 @@
 package com.example.Quora_Backend_System.model;
 
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,6 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Schema(description = "Details about the Comment")
 public class Comment extends BaseClass {
 
     @Column(nullable = false)

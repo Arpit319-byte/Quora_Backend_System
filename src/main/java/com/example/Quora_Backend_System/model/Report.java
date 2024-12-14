@@ -1,5 +1,6 @@
 package com.example.Quora_Backend_System.model;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import jdk.jshell.Snippet;
 import lombok.AllArgsConstructor;
@@ -13,6 +14,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Schema(description = "Details about the Report")
 public class Report extends BaseClass{
 
     @Column(nullable = false)
