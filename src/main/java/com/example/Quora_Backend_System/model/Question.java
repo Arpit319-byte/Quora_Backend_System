@@ -16,17 +16,17 @@ public class Question extends BaseClass {
     @Column(nullable = false)
     private String content;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name = "user_id",nullable = false)
     private User user;
 
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question",cascade = CascadeType.ALL)
     private List<Answer> answers;
 
-    @OneToMany(mappedBy = "ParentType")
+    @OneToMany(mappedBy = "parentType",cascade = CascadeType.ALL)
     List<Comment> comments;
 
-    @OneToMany(mappedBy = "targetEntity")
+    @OneToMany(mappedBy = "targetEntity",cascade = CascadeType.ALL)
     List<Report> reports;
 
 }

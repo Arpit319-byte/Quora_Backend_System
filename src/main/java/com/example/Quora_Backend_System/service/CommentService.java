@@ -61,10 +61,6 @@ public class CommentService {
                 return null;
             }
             existingComment.setContent(comment.getContent());
-            existingComment.setQuestion(comment.getQuestion());
-            existingComment.setUser(comment.getUser());
-            existingComment.setAnswer(comment.getAnswer());
-            existingComment.setComment(comment.getComment());
             return commentRepository.save(comment);
         }catch (Exception e) {
             logger.error("Error occurred while updating comment in the database", e);
@@ -74,6 +70,18 @@ public class CommentService {
 
     public boolean deleteComment(Long commentId) {
 
+        logger.info("Deleting comment by id - {} from the database", commentId);
+        try {
+            Comment existingComment = commentRepository.findById(commentId).orElse(null);
+            if (existingComment == null) {
+                logger.error("Comment not found for id - {}", commentId);
+                return false;
+            }
+            commentRepository.deleteById(commentId);
+            return true;
+        }catch (Exception e) {
+            logger.error("Error occurred while deleting comment by id - {}", commentId, e);
+        }
         return false;
     }
 }

@@ -16,7 +16,7 @@ public class Vote extends BaseClass {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private VoteType type;
+    private VoteType voteType;
 
     @ManyToOne
     @JoinColumn(name = "user_id",nullable = false)

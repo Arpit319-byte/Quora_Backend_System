@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Setter
 @Getter
 @AllArgsConstructor
@@ -27,4 +29,9 @@ public class Comment extends BaseClass {
     @Column(nullable = false)
     private ParentType parentType;
 
+    @OneToMany(mappedBy = "voteType",cascade = CascadeType.ALL)
+    private List<Vote> votes;
+
+    @OneToMany(mappedBy = "targetEntity",cascade = CascadeType.ALL)
+    private List<Report> reports;
 }

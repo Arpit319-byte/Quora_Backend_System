@@ -21,8 +21,8 @@ public class Report extends BaseClass{
     @Column(nullable = false)
     private String details;
 
-    @ManyToOne
-    private User reportedBy;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
