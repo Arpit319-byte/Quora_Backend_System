@@ -21,13 +21,15 @@ public class User extends BaseClass{
     @Column(nullable = false)
     private String email;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Question> questions;
+    @OneToMany(mappedBy = "user")
+    List<Question> questions;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<Answer> answers;
+    @OneToMany(mappedBy = "user")
+    List<Answer> answers;
 
-//    @OneToMany(cascade = CascadeType.ALL)
-//    private List<Comment> comments;
+    @OneToMany(mappedBy = "user")
+    List<Comment> comments;
 
+    @OneToMany(mappedBy = "user")
+    List<Vote> votes;
 }
