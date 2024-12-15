@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/v1/user")
 @Tag(name = "User", description = "Operations related to User")
 public class UserController {
 
