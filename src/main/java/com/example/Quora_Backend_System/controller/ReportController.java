@@ -26,11 +26,13 @@ public class ReportController {
 
     @GetMapping
     public ResponseEntity<List<Report>> getAllReports() {
+        logger.info("Getting all reports");
         return ResponseEntity.ok(reportService.getAllReports());
     }
 
     @GetMapping("/{reportId}")
     public ResponseEntity<Report> getReportById(@PathVariable Long reportId) {
+        logger.info("Getting report by id - " + reportId);
         Report report = reportService.getReportById(reportId);
         if (report == null) {
             return ResponseEntity.notFound().build();
@@ -40,11 +42,13 @@ public class ReportController {
 
     @PostMapping
     public ResponseEntity<Report> createReport(@Valid @RequestBody Report report) {
+        logger.info("Creating report");
         return ResponseEntity.ok(reportService.createReport(report));
     }
 
     @PutMapping("/{reportId}")
     public ResponseEntity<Report> updateReport(@PathVariable Long reportId, @Valid @RequestBody Report report) {
+        logger.info("Updating report by id - " + reportId);
         Report updatedReport = reportService.updateReport(reportId, report);
         if (updatedReport == null) {
             return ResponseEntity.notFound().build();
@@ -54,6 +58,7 @@ public class ReportController {
 
     @DeleteMapping("/{reportId}")
     public ResponseEntity<Void> deleteReport(@PathVariable Long reportId) {
+        logger.info("Deleting report by id - " + reportId);
         reportService.deleteReport(reportId);
         return ResponseEntity.noContent().build();
     }
