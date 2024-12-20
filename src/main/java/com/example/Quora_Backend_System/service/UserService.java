@@ -11,9 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class UserService{
+public class UserService {
 
-    private final static Logger logger = LoggerFactory.getLogger(UserService.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
 
     private final UserRepository userRepository;
 
@@ -22,29 +22,20 @@ public class UserService{
         this.userRepository = userRepository;
     }
 
-
     public List<User> getAllUsers() {
         logger.info("Getting all users from the database");
-
         try {
             return userRepository.findAll();
         } catch (Exception e) {
             logger.error("Error occurred while getting all users from the database", e);
             return null;
         }
-
     }
 
     public User getUserById(Long userId) {
-        logger.info("Getting user by id - {} from the database",userId);
-
+        logger.info("Getting user by id - {}", userId);
         try {
-            User user = userRepository.findById(userId).orElse(null);
-            if (user == null) {
-                logger.error("User not found for id - {}", userId);
-                return null;
-            }
-            return user;
+            return userRepository.findById(userId).orElse(null);
         } catch (Exception e) {
             logger.error("Error occurred while getting user by id - " + userId, e);
             return null;
@@ -54,7 +45,6 @@ public class UserService{
     @Transactional
     public User createUser(User user) {
         logger.info("Creating user in the database");
-
         try {
             return userRepository.save(user);
         } catch (Exception e) {
@@ -65,15 +55,15 @@ public class UserService{
 
     @Transactional
     public User updateUser(Long userId, User user) {
-        logger.info("Updating user by id - {} in the database",userId);
-
+        logger.info("Updating user by id - {}", userId);
         try {
             User userToUpdate = userRepository.findById(userId).orElse(null);
             if (userToUpdate == null) {
-                logger.error("User not found for id - {}", userId);
+                logger.error("User not found with id {}", userId);
                 return null;
             }
-
+            userToUpdate.setUserName(user.getUserName());
+            userToUpdate.setEmail(user.getEmail());
             return userRepository.save(userToUpdate);
         } catch (Exception e) {
             logger.error("Error occurred while updating user by id - " + userId, e);
@@ -81,16 +71,16 @@ public class UserService{
         }
     }
 
+    @Transactional
     public Boolean deleteUser(Long userId) {
-        logger.info("Deleting user by id - {} from the database",userId);
-
+        logger.info("Deleting user by id - {}", userId);
         try {
-            User user = userRepository.findById(userId).orElse(null);
-            if (user == null) {
-                logger.error("User not found for id - {}", userId);
+            User userToDelete = userRepository.findById(userId).orElse(null);
+            if (userToDelete == null) {
+                logger.error("User not found with id {}", userId);
                 return false;
             }
-            userRepository.delete(user);
+            userRepository.delete(userToDelete);
             return true;
         } catch (Exception e) {
             logger.error("Error occurred while deleting user by id - " + userId, e);
