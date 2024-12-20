@@ -22,8 +22,6 @@ public class Question extends BaseClass {
     @JoinColumn(name = "user_id",nullable = false)
     private User user;
 
-    @OneToMany(mappedBy = "question",cascade = CascadeType.ALL)
-    private List<Answer> answers;
 
     @OneToMany(mappedBy = "parentType",cascade = CascadeType.ALL)
     List<Comment> comments;
