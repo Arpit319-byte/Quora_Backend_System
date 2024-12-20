@@ -24,8 +24,16 @@ public class Vote extends BaseClass {
     @JoinColumn(name = "user_id",nullable = false)
     private User user;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private TargetEntity targetEntity;
+    @ManyToOne
+    @JoinColumn(name = "answer_id")
+    private Answer answer;
+
+    @ManyToOne
+    @JoinColumn(name = "question_id")
+    private Question question;
+
+    @ManyToOne
+    @JoinColumn(name = "comment_id")
+    private Comment comment;
 
 }
