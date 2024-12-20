@@ -6,13 +6,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 public class QuestionService {
 
-    private final static Logger logger = LoggerFactory.getLogger(QuestionService.class);
+    private static final Logger logger = LoggerFactory.getLogger(QuestionService.class);
 
     private final QuestionRepository questionRepository;
 
@@ -21,31 +22,29 @@ public class QuestionService {
         this.questionRepository = questionRepository;
     }
 
-
     public List<Question> getAllQuestions() {
         logger.info("Getting all questions from the database");
-        return questionRepository.findAll();
+        try {
+            return questionRepository.findAll();
+        } catch (Exception e) {
+            logger.error("Error occurred while getting all questions from the database", e);
+            return null;
+        }
     }
 
     public Question getQuestionById(Long questionId) {
-        logger.info("Getting question by id - {} from the database", questionId);
-
+        logger.info("Getting question by id - {}", questionId);
         try {
-            Question question = questionRepository.findById(questionId).orElse(null);
-            if (question == null) {
-                logger.error("Question not found for id - {}", questionId);
-                return null;
-            }
-            return question;
+            return questionRepository.findById(questionId).orElse(null);
         } catch (Exception e) {
             logger.error("Error occurred while getting question by id - {}", questionId, e);
             return null;
         }
     }
 
+    @Transactional
     public Question createQuestion(Question question) {
         logger.info("Creating question in the database");
-
         try {
             return questionRepository.save(question);
         } catch (Exception e) {
@@ -54,37 +53,36 @@ public class QuestionService {
         }
     }
 
+    @Transactional
     public Question updateQuestion(Long questionId, Question question) {
-        logger.info("Updating question in the database");
-
+        logger.info("Updating question by id - {}", questionId);
         try {
             Question existingQuestion = questionRepository.findById(questionId).orElse(null);
             if (existingQuestion == null) {
-                logger.error("Question not found for id - {}", questionId);
+                logger.error("Question not found with id {}", questionId);
                 return null;
             }
             existingQuestion.setContent(question.getContent());
             return questionRepository.save(existingQuestion);
         } catch (Exception e) {
-            logger.error("Error occurred while updating question in the database", e);
+            logger.error("Error occurred while updating question by id - {}", questionId, e);
             return null;
         }
     }
 
+    @Transactional
     public Boolean deleteQuestion(Long questionId) {
-
-        logger.info("Deleting question from the database with id- {}", questionId);
-
+        logger.info("Deleting question by id - {}", questionId);
         try {
             Question question = questionRepository.findById(questionId).orElse(null);
             if (question == null) {
-                logger.error("Question not found for id - {}", questionId);
+                logger.error("Question not found with id {}", questionId);
                 return false;
             }
             questionRepository.deleteById(questionId);
             return true;
         } catch (Exception e) {
-            logger.error("Error occurred while deleting question from the database with id- {}", questionId, e);
+            logger.error("Error occurred while deleting question by id - {}", questionId, e);
             return false;
         }
     }
