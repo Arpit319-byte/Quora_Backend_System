@@ -19,7 +19,7 @@ import java.util.List;
 public class User extends BaseClass{
 
     @Column(nullable = false)
-    private String name;
+    private String userName;
 
     @Column(nullable = false)
     private String password;
