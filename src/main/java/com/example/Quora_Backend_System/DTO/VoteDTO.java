@@ -1,5 +1,6 @@
 package com.example.Quora_Backend_System.DTO;
 
+import com.example.Quora_Backend_System.model.VoteType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -12,7 +13,7 @@ public class VoteDTO {
 
     @NotBlank(message = "Vote type is required")
     @Size(max = 10, message = "Vote type can't be more than 10 characters")
-    private String voteType;
+    private VoteType voteType;
 
     @NotNull(message = "User id is required")
     private Long userId;
