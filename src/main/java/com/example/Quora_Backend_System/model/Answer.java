@@ -27,12 +27,4 @@ public class Answer extends BaseClass {
     @JoinColumn(name = "question_id")
     private Question question;
 
-    @OneToMany(mappedBy = "parentType",cascade = CascadeType.ALL)
-    private List<Comment> comment;
-
-    @OneToMany(mappedBy = "targetEntity",cascade = CascadeType.ALL)
-    private List<Vote> votes;
-
-    @OneToMany(mappedBy = "targetEntity",cascade = CascadeType.ALL)
-    private List<Report> reports;
 }
