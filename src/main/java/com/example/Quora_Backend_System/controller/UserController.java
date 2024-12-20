@@ -89,6 +89,7 @@ public class UserController {
         userDTO.setId(user.getId());
         userDTO.setUserName(user.getUserName());
         userDTO.setPassword(user.getPassword());
+        userDTO.setEmail(user.getEmail());
         return userDTO;
     }
 
@@ -97,6 +98,7 @@ public class UserController {
         user.setId(userDTO.getId());
         user.setUserName(userDTO.getUserName());
         user.setPassword(userDTO.getPassword());
+        user.setEmail(userDTO.getEmail());
         return user;
     }
 }
