@@ -26,14 +26,12 @@ public class Comment extends BaseClass {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @ManyToOne
+    @JoinColumn(name = "answer_id")
+    private Answer answer;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private ParentType parentType;
+    @ManyToOne
+    @JoinColumn(name = "parent_comment_id")
+    private Comment parentComment;
 
-    @OneToMany(mappedBy = "voteType",cascade = CascadeType.ALL)
-    private List<Vote> votes;
-
-    @OneToMany(mappedBy = "targetEntity",cascade = CascadeType.ALL)
-    private List<Report> reports;
 }
