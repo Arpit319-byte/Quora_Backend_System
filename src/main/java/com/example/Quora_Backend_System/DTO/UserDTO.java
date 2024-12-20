@@ -1,4 +1,4 @@
-package com.example.Quora_Backend_System.DTOS;
+package com.example.Quora_Backend_System.DTO;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
