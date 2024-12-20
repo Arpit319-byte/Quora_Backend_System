@@ -23,10 +23,4 @@ public class Question extends BaseClass {
     private User user;
 
 
-    @OneToMany(mappedBy = "parentType",cascade = CascadeType.ALL)
-    List<Comment> comments;
-
-    @OneToMany(mappedBy = "targetEntity",cascade = CascadeType.ALL)
-    List<Report> reports;
-
 }
